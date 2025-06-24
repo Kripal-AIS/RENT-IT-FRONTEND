@@ -1,0 +1,87 @@
+.mytools{
+    h2{
+        // text-align: left;
+    }
+    .btns{
+        display: flex;
+        gap: .5em;
+        margin: .5em 0em;
+    }
+    .tabs{
+            padding: .5em 1em;
+            cursor: pointer;
+            // transition:1s color ease;
+    }
+    .listProduct{
+        display: flex;
+        flex-direction: column;
+        .cards{
+            padding: 1em;
+            outline: 2px solid black;
+            border-radius: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1em;
+            width: 100%;
+            .product{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1em;
+            }
+            .borrowerInfo{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1em;
+                img{
+                    width: 2em;
+                height: 2em;
+                object-fit: cover;
+                border-radius: 50%;
+                }
+            }
+
+            .des{
+                max-width: 20ch;
+            }
+
+            .contract{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+            }
+            .actions{
+                display: flex;
+                gap: 1em;
+                button{
+                    padding: 1em 1.2em;
+                    
+                }
+            }
+            img{
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                border-radius: 50%;
+                box-shadow: 0 0 1px .1px gray;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+
+
+
+  @media screen and (max-width: 520px) {
+    .cards{
+        flex-direction: column;
+    }
+  }
+ 
+
+
+

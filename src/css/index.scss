@@ -1,0 +1,264 @@
+$lblue :#7AACDC;
+$dblue : #05396B;
+
+$lyellow :#F3E0D2;
+$dyellow : #C28949;
+
+$lgreen :#D5F3D2;
+$dgreen : #53C249;
+
+$lred :#EE8888;
+$dred : #BB0303;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap');
+@import './components/_button.scss';
+@import './components/_footer.scss';
+@import './components/_header.scss';
+@import './components/_input.scss';
+@import './components/_logo.scss';
+@import './components/productCard';
+@import './components/chatBubble';
+@import './components/chatHistory';
+
+
+
+@import './pages/_addProduct.scss';
+@import './pages/_editProfile.scss';
+@import './pages/_home.scss';
+@import './pages/_myTools.scss';
+@import './pages/_queries.scss';
+@import './pages/_signup.scss';
+@import './pages/_login.scss';
+@import './pages/_explore.scss';
+@import './pages/productpage';
+@import './pages/assignProduct';
+@import './pages/addReview';
+@import './components/loder';
+@import './pages/productRequest';
+
+
+
+html
+{
+    font-size: 80%;
+    // filter: invert(1) hue-rotate(180deg);
+}
+img{
+    // filter: invert(1) hue-rotate(180deg) !important;
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+    // outline: blue 1px solid;
+}
+.logo{
+    display: flex;
+    gap: .3em;
+    align-items: center;
+    justify-content: center;
+    img{
+        transition: .2s linear;
+    }
+    &:hover{
+        img{
+            scale: 1.5;
+            transform: rotateZ(360deg);
+        }
+    }
+}
+
+
+
+.logoimg{
+    width: 50px;
+    // height: 60px;
+}
+
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+
+h1,h2,h3,h4{
+    font-weight: bolder;
+}
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    width: 100%;
+  }
+
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+}
+.flex-bet{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3em;
+
+}
+.flex-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    flex-direction: column;
+}
+
+h1{
+    font-size: 3rem;
+}
+
+p,div{
+    font-size: 1.5rem;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.page{
+    padding: 1em;
+    min-height: 80vh;
+    // padding-top: 1em;
+}
+.padd{
+    padding: 2em;
+
+}
+
+button {
+    padding: 1em 2em;
+    border-radius: .7em;
+    border:none;
+    font-size:1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
+
+button:hover{
+    scale: 1.1;
+}
+
+
+
+button:disabled{
+    background-color: gray !important;
+    color:black !important;
+    cursor: not-allowed;
+}
+input,textarea,select{
+    padding: .4em .5em;
+    font-size: 1em;
+    border-radius: .4em;
+    // border:3px solid gray;
+    border: none;
+    outline: none;
+    width: 100%;
+    max-width: 40rem;
+    background-color: rgb(213, 213, 213);
+}
+
+
+.css-1s2u09g-control{
+    border:3px solid gray !important;
+    padding: .2em .5em;
+    border-radius: .4em !important;
+    outline: none !important;
+}
+
+  
+select{
+    width: unset;
+    border: none;
+}
+
+input:focus ,textarea:focus{
+    outline: 3px solid $dblue;
+    
+}
+.blue{
+    background-color: $lblue;
+    color:$dblue;
+}
+.grey{
+    background-color: rgb(191, 191, 191);
+    color:rgb(47, 47, 47);
+}
+
+a .active{
+    color: green;
+}
+.green{
+    background-color: $lgreen;
+    color:$dgreen;
+}
+
+.yellow{
+    background-color: $lyellow;
+    color:$dyellow;
+}
+.red{
+    background-color: $lred;
+    color:$dred;
+}
+
+.errorPage{
+    height: 100vh !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+
+#partitioned {
+  padding-left: 15px;
+  letter-spacing: 42px;
+  border: 0;
+  background-image: linear-gradient(to left, black 70%, rgba(255, 255, 255, 0) 0%);
+  background-position: bottom;
+  background-size: 50px 1px;
+  background-repeat: repeat-x;
+  background-position-x: 35px;
+  width: 220px;
+  min-width: 220px;
+}
+
+#divInner{
+  left: 0;
+  position: sticky;
+}
+
+#divOuter{
+  width: 190px; 
+  overflow: hidden;
+}
+.otpinputs{
+    margin-top: 5em !important;
+}
+
+.fullpage{
+    min-height: 100vh;
+    
+}
