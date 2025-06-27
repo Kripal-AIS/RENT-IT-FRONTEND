@@ -1,0 +1,80 @@
+.login{
+    min-height: 100vh !important;
+    
+    .left,.right{
+        flex-grow: 1;
+        width: 100%;
+    }  
+
+    .passwordFeild{
+        position: relative;
+        .i{
+            position: absolute;
+            right: 3%;
+            bottom: 15%;
+            cursor: pointer;
+
+
+        }
+    }
+    
+    .left{
+        .btns{
+            width: 100%;
+            button{
+                background: none;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1em;
+                
+            }
+        }
+    }
+    .form{
+        width: 100%;
+        div{
+            gap: 1em;
+
+        }
+        .fgtp{
+            text-align: right;
+            width: 100%;
+            color:$dyellow;
+        }
+    }
+    .right{
+        min-height: 100vh;
+        background: linear-gradient(90deg, rgba(83,194,73,1) 0%, rgba(122,172,220,1) 100%);
+        h1{
+            text-align: center;
+        }
+        p{
+            text-align: center;
+        }
+    }
+    .img{
+        width: 15em;
+    }
+}
+
+
+.sendemail{
+    min-height: 100vh;
+    width: 100%;
+    padding: 1em;
+}
+
+@media screen and (max-width:900px) {
+
+    .login{
+        .left{
+            padding: 1em;
+        }
+        .right{
+            display: none;
+        }
+    }
+    
+}

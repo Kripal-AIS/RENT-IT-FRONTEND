@@ -1,0 +1,33 @@
+.footer{
+    background: black;
+    padding-bottom: 5em !important;
+    .top{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2em;
+        p{
+            text-align: center;
+          }
+    }
+    *{
+
+        color: white;
+    }
+    .mid{
+        display: flex;
+        gap: 3em;
+    }
+    .bottom{
+        color: white;
+        width: 100%;
+    }
+    .end{
+        display: flex;
+        gap: 1em;
+        i{
+            font-size: 2rem;
+        }
+    }
+
+}

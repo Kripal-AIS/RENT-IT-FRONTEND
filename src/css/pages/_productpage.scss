@@ -1,0 +1,232 @@
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.78);
+
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cross {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.productpage {
+  h1 {
+    font-size: 5rem;
+    text-align: center;
+    text-transform: capitalize;
+    // margin-bottom: 2em;
+  }
+
+  .rating {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.2em 0.8em;
+    border-radius: 1em;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    margin-top: 1em;
+  }
+  .top {
+    width: 100%;
+    display: flex;
+    margin-bottom: 3em;
+
+    .left,
+    .right {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: column;
+      img {
+        width: 100%;
+        border-radius: 1em;
+      }
+      .inRight {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 1em;
+
+        h2,
+        p {
+          text-align: left;
+          width: 100%;
+        }
+      }
+    }
+
+    .right {
+      position: sticky !important;
+      top: 3em;
+      height: fit-content;
+      padding: 2em;
+    }
+  }
+
+  .actions {
+    flex-wrap: wrap;
+  }
+  .prouctdetails {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 3em 0;
+    gap: 1em;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    .productdetailsIn {
+      flex-wrap: wrap;
+    }
+
+    .one {
+      width: 100%;
+      // min-width: max-content;
+      padding: 1em;
+      max-width: 20rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 1em;
+    }
+  }
+
+  .bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    .ownerdetails,
+    .reviews {
+      width: 100%;
+      .reviewlists {
+        height: 400px;
+        overflow-y: scroll;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        gap: 1em;
+        padding: 1em;
+
+        .reviewCard {
+          width: 100%;
+
+          padding: 1em;
+          border-radius: 1em;
+          .bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+
+  .chooseDate {
+    background-color: white;
+    padding: 2em;
+    border-radius: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
+    svg {
+      width: 2em;
+    }
+
+    .detailBox {
+      // border: 2px solid red;
+      display: flex;
+      gap: 30px;
+      width: 600px;
+
+      textarea {
+        max-width: 100% !important;
+        width: 100% !important;
+        // border: 2px solid red;
+        resize: none;
+        height: 150px;
+      }
+
+      .subDetail {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+
+        label {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  .ownerdetails {
+    margin-bottom: 3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    h2,
+    p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1em;
+      width: 100%;
+    }
+  }
+
+  .verified {
+    color: $dblue;
+  }
+}
+
+@media screen and (max-width: 930px) {
+  .productpage {
+    h1 {
+      font-size: 3em;
+    }
+    .top {
+      flex-direction: column;
+      .right {
+        padding: 1em 0;
+      }
+    }
+    .bottom {
+      flex-direction: column;
+    }
+    .reviewlists {
+      padding: 1em 0 !important;
+    }
+  }
+}
