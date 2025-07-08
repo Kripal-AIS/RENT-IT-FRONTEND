@@ -1,0 +1,23 @@
+.assignproductpage{
+    .form{
+        width: max-content;
+        margin-top: 2em;
+        width: 100%;
+        max-width: 500px;
+        .inp{
+            width: 100%;
+        }    
+    }
+    .imageINLIST{
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .list{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1em;
+    }
+}

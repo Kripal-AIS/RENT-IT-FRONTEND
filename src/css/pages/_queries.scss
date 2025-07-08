@@ -1,0 +1,72 @@
+.queries{
+    position: relative;
+    h2{
+        margin-bottom: 1em;
+    }
+    .right{
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+    .queryCard{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 2em;
+        border-radius: 1em;
+        gap: .2em;
+        .description{
+            margin: 1em 0;
+        }
+        h3{
+            margin-bottom: none !important;
+            width: 100%;
+            text-align: left;
+        }
+        img{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+
+        }
+
+        .bottom{
+            display: flex;
+            gap: 1em;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .wrapper{
+        display: flex;
+        gap: 2em;
+        .left,.right{
+            width: 100%;
+        }
+        .form{
+            position: sticky;
+            top: 10em;
+            height: fit-content;
+        }
+    }
+
+    h2{
+        position: sticky;
+        position: -webkit-sticky;
+    }
+
+    .right{
+        .Qcard{
+            height: 20em;
+            background-color: aqua;
+        }
+    }
+}
+
+@media screen and (max-width:750px) {
+    .wrapper{
+        flex-direction: column;
+    }
+    
+}

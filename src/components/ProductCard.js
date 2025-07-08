@@ -24,7 +24,7 @@ export default function ProductCard(props) {
        <img key={props.title} src={props.image} alt="" />
     {/* </div> */}
 
-    <p className="price">{props.rent}{"₹ "}{props.timeperiod}</p>
+    <p className="price">{props.rent}{"$ "}{props.timeperiod}</p>
     <p>{props.category}</p>
 
     <p className="location"><LocationOnIcon />{props.location}</p>

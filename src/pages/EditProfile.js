@@ -45,17 +45,9 @@ export default function EditProfile() {
     if (img) setPreview(URL.createObjectURL(img));
   };
 
-  const verifyMobile = () => {
-
-    // axios.get('/')
-    navigate('/enterOTP', { state: "Mobile" })
-  }
 
   const verifyEmail = async () => {
-    // navigate('/enterOTP',{state:"Email"})
     try {
-
-
       const res = await axios.get(API + '/auth/send_verification_email', { withCredentials: true })
       setEmailSent(true)
     }
