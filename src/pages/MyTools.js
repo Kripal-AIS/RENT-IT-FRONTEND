@@ -15,11 +15,6 @@ export default function MyTools() {
   const [borrowed, setBorrowed] = useState([]);
   const [isLoading, setIsLoading] = useState();
 
-  // const {  error, data } = useQuery('repoData', () =>
-  //    axios.get(API+"/user/mytools",{withCredentials:true}).then(res =>
-  //      res
-  //    )
-  //  )
 
   const retriveProduct = async (id) => {
     setIsLoading(true);

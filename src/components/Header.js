@@ -8,6 +8,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import HelpIcon from '@mui/icons-material/Help';
 import ForumIcon from '@mui/icons-material/Forum';
 import SearchIcon from '@mui/icons-material/Search';
+import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import Logo from "./Logo";
 
 export default function Header() {
@@ -59,40 +60,50 @@ export default function Header() {
 
           {/* <Link to="/explore">Explore</Link> */}
 
-          {<div className="actions">
-            {!user?.isAdmin && <Link
+          {
+            <div className="actions">
+              {!user?.isAdmin && (
+                <Link to="/mytools">
+                  <Inventory2Icon sx={{ fontSize: 30 }} />
+                  {/* My Tools */}
+                </Link>
+              )}
 
-              to="/mytools"
-            >
+              {!user?.isAdmin && (
+                <Link to="/addProduct" className="">
+                  <AddCircleIcon sx={{ fontSize: 30 }} />
+                  {/* Add Product */}{" "}
+                </Link>
+              )}
 
+              {!user?.isAdmin && (
+                <Link to="/queries">
+                  {" "}
+                  <HelpIcon sx={{ fontSize: 30 }} />
+                  Queries{" "}
+                </Link>
+              )}
 
-              <Inventory2Icon sx={{ fontSize: 30 }} />
-              {/* My Tools */}
-            </Link>}
+              {!user?.isAdmin && (
+                <Link to="/requests">
+                  {" "}
+                  <ForumIcon sx={{ fontSize: 30 }} />
+                  Request{" "}
+                </Link>
+              )}
+              {user?.isAdmin && (
+                <Link to="/ActiveUsers">
+                  <PermIdentityOutlinedIcon sx={{ fontSize: 30 }} />
+                  Active Users  
+                </Link>
+              )}
 
-
-            {!user?.isAdmin && <Link to="/addProduct" className="">
-              <AddCircleIcon sx={{ fontSize: 30 }} />
-              {/* Add Product */}{" "}
-            </Link>}
-
-            {/* {!user?.isAdmin && <Link to="/queries">
-              {" "}
-              <HelpIcon sx={{ fontSize: 30 }} /> */}
-              {/* Queries */}{" "}
-            {/* </Link>} */}
-
-           {/* {!user?.isAdmin && <Link to="/requests">
-              {" "}
-              <ForumIcon sx={{ fontSize: 30 }} /> */}
-
-              {/* Request */}{" "}
-            {/* </Link>} */}
-
-            <Link to="/editProfile">
-              {user?.isAdmin && <div>Hi Admin</div>}<img src={user.avatar} className="profile" alt="" />
-            </Link>
-          </div>}
+              <Link to="/editProfile">
+                {user?.isAdmin && <div>Hi Admin</div>}
+                <img src={user.avatar} className="profile" alt="" />
+              </Link>
+            </div>
+          }
         </nav>
       ) : (
         <nav>
@@ -102,7 +113,6 @@ export default function Header() {
           <div className="mid">
             <div className="search loginSearch">
               <SearchIcon sx={{ fontSize: 30 }} color="action" />
-
 
               <input
                 type="text"

@@ -20,7 +20,7 @@ export default function Footer() {
       <div className="mid">
       <div className="bottom flex">
       <p>
-        © All rights are reserved 2022-23
+        © All rights are reserved 2025-2026
         </p> 
       </div>
       </div>

@@ -3,9 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../API";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import ReviewCard from "../components/ReviewCard";
 import Loader from "../components/Loader";
 import { motion } from "framer-motion";
-
+import AddReview from "./AddReview";
 import StarIcon from '@mui/icons-material/Star';
 import VerifiedIcon from '@mui/icons-material/Verified';
 
@@ -78,7 +79,10 @@ export default function Product() {
     return Math.floor(DAY);
   };
 
-
+  const addReview = () => {
+    // navigate('/addreview',{state:product});
+    setModelShow(true);
+  };
 
   const sendRequest = async () => {
 
@@ -131,7 +135,13 @@ export default function Product() {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
       >
-
+        {modelShow && (
+          <div className="popup">
+            <div id="addReview">
+              <AddReview closeModel={setModelShow} product={product} />
+            </div>
+          </div>
+        )}
 
         {chooseDate && (
           <div className="popup">
@@ -185,7 +195,7 @@ export default function Product() {
             </div>
 
             <div className="actions">
-              {product.renterid === user._id && !product.issued && (
+              {(user?.isAdmin || product.renterid === user._id && !product.issued) && (
                 <button
                   className="blue"
                   onClick={() => navigate("/editProduct", { state: product })}
@@ -193,7 +203,19 @@ export default function Product() {
                   Edit Product
                 </button>
               )}
-
+              {product.renterid === user._id && !product.issued && (
+                <button
+                  className="yellow"
+                  onClick={() => navigate("/assignproduct", { state: product })}
+                >
+                  Assign Product
+                </button>
+              )}
+              {product.renterid === user._id && product.issued && (
+                <button className="red" onClick={() => retriveProduct()}>
+                  Retrive Product
+                </button>
+              )}
 
               {product.renterid === user._id && !product.issued && (
                 <button className="red" onClick={() => deleteProduct()}>
@@ -201,21 +223,25 @@ export default function Product() {
                 </button>
               )}
 
-              {  user?.isAdmin && !product.issued && (
+             {  user?.isAdmin && !product.issued && (
                 <button className="red" onClick={() => deleteProduct()}>
                   Delete Product
                 </button>
               )}
 
+              {product.borrowerid && product.borrowerid === user._id && (
+                <button className="yellow" onClick={() => addReview()}>
+                  Add Review
+                </button>
+              )}
 
-{/* 
               {
                 product.renterid !== user._id &&
-                product.borrowerid !== user._id && (
+                product.borrowerid !== user._id && !user?.isAdmin &&  (
                   <button className="yellow" onClick={() => setChooseDate(true)}>
                     Request product
                   </button>
-                )} */}
+                )}
             </div>
           </div>
         </div>
@@ -244,6 +270,21 @@ export default function Product() {
             </div>
           </div>
 
+          <div className="reviews">
+            <h2>Reviews</h2>
+
+            <div className="reviewlists">
+              {product?.reviews?.length ? (
+                <>
+                  {product.reviews.map((rev) => (
+                    <ReviewCard {...rev} />
+                  ))}
+                </>
+              ) : (
+                <b>No Reviews</b>
+              )}
+            </div>
+          </div>
         </div>
       </motion.div>
     );
