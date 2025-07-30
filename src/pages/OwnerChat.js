@@ -1,24 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import io from "socket.io-client";
+
+const socket = io("http://localhost:5000");
 
 function OwnerChat() {
-  const { userId } = useParams(); // receiver
-  const user = JSON.parse(localStorage.getItem("user")); // sender from localStorage
+  const { userId } = useParams(); // the user you're chatting with
+  const user = JSON.parse(localStorage.getItem("user")); // owner logged in
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchMessages = async () => {
-      if (!user || !user._id || !userId) return;
+  const roomId = [user?._id, userId].sort().join("_");
 
+  useEffect(() => {
+    
+    if (!user || !user._id || !userId) return;
+if (!roomId || roomId.includes("undefined")) {
+      console.error("Invalid roomId:", roomId);
+      return;
+    }
+    // 1. Join room
+    socket.emit("joinRoom", roomId );
+
+    // 2. Listen for incoming messages
+    socket.on("receiveMessage", ({ message, senderId }) => {
+      setMessages((prev) => [...prev, { message, senderId }]);
+    });
+
+    // 3. Fetch existing messages
+    const fetchMessages = async () => {
       try {
-        const res = await axios.post("http://localhost:5000/api/messages/getmsg", {
+        const res = await axios.post("http://localhost:5000/api/message/getmsg", {
           from: user._id,
           to: userId,
         });
-        setMessages(res.data);
+
+        setMessages(
+          res.data.map((msg) => ({
+            message: msg.message,
+            senderId: msg.sender,
+          }))
+        );
       } catch (err) {
         console.error("❌ Error loading messages:", err);
       } finally {
@@ -27,22 +52,39 @@ function OwnerChat() {
     };
 
     fetchMessages();
+
+    return () => {
+      socket.off("receiveMessage");
+      socket.disconnect();
+    };
   }, [user, userId]);
+    // Scroll-to-bottom effect:
+const chatBoxRef = useRef(null);
+useEffect(() => {
+  chatBoxRef.current?.scrollTo(0, chatBoxRef.current.scrollHeight);
+}, [messages]);
 
   const sendMessage = async () => {
-    if (!message.trim() || !user || !user._id || !userId) return;
+    if (!message.trim()) return;
 
+    // 1. Send via socket
+    socket.emit("sendMessage", {
+      roomId,
+      message,
+      senderId: user._id,
+    });
+
+    setMessage("");
+
+    // 2. Save in DB
     try {
-      await axios.post("http://localhost:5000/api/messages/addmsg", {
+      await axios.post("http://localhost:5000/api/message/addmsg", {
         from: user._id,
         to: userId,
         message,
       });
-
-      setMessages((prev) => [...prev, { fromSelf: true, message }]);
-      setMessage("");
     } catch (err) {
-      console.error("❌ Error sending message:", err);
+      console.error("❌ Error saving message:", err);
     }
   };
 
@@ -61,7 +103,7 @@ function OwnerChat() {
           <p>No messages yet.</p>
         ) : (
           messages.map((msg, idx) => (
-            <div key={idx} style={{ textAlign: msg.fromSelf ? "right" : "left" }}>
+            <div key={idx} style={{ textAlign: msg.senderId === user._id ? "right" : "left" }}>
               {msg.message}
             </div>
           ))

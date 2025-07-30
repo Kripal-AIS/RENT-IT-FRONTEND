@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import AddReview from "./AddReview";
 import StarIcon from '@mui/icons-material/Star';
 import VerifiedIcon from '@mui/icons-material/Verified';
-import ChatRoom from "../components/ChatRoom";
+
 
 export default function Product() {
   const { id } = useParams();
@@ -294,8 +294,20 @@ const fetchProduct = async () => {
             </div>
           </div>
           <div className="chat-section">
-  <h2>Chat with Owner</h2>
-  <ChatRoom roomId={`product_${product._id}`} currentUser={user} />
+  
+ <button
+  className="blue"
+  onClick={() =>
+    navigate("/chatwithowner", {
+      state: {
+        
+        ownerId: product.renterid
+      },
+    })
+  }
+>
+  Chat with Owner
+</button>
 </div>
 
         </div>

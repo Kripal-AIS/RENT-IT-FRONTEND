@@ -25,6 +25,7 @@ import ProductRequest from "./pages/ProductRequest";
 import ActiveUsers from "./pages/ActiveUsers";
 import OwnerChat from "./pages/OwnerChat";
 import OwnerInbox from "./pages/OwnerInbox";
+import ChatWithOwner from "./pages/ChatWithOwner";
 
 function App() {
   const queryClient = new QueryClient();
@@ -50,6 +51,7 @@ function App() {
                   <Route exact path="requests" element={<ProductRequest />} />
                   <Route exact path="owner/inbox" element={<OwnerInbox />} />
                   <Route exact path="owner/chat/:userId" element={<OwnerChat />} />
+                  <Route path="/chatwithowner" element={<ChatWithOwner />} />
                   {auth.isAdmin && <Route exact path="/ActiveUsers" element={<ActiveUsers />} />}
                   <Route exact path="queries" element={<Queries />} />
                   <Route exact path="assignproduct" element={<AssignProduct />} />
