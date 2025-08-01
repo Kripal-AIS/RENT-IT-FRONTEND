@@ -196,6 +196,7 @@ export default function ProductRequest() {
                   <th>User</th>
                   <th>Start</th>
                   <th>Till</th>
+                  <th>Ask Price</th>
                   <th>Address</th>
                   <th>Accept</th>
                   <th>Decline</th>
@@ -229,6 +230,11 @@ export default function ProductRequest() {
                     <td>
                       <div className="">
                         <p>{changeDateFormat(req.tilldate)}</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="">
+                        <p>${req?.biddingPrice}</p>
                       </div>
                     </td>
                     <td>

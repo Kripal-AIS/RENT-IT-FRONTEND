@@ -10,6 +10,7 @@ import { motion } from 'framer-motion'
 import logout from "../helpers/logout";
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Select from 'react-select'
 
 export default function EditProfile() {
   const [img, setImg] = useState();
@@ -25,7 +26,18 @@ export default function EditProfile() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector((state) => state.auth)
-
+  const [biddingAcceptingTimeConfiguration, setBiddingAcceptingTimeConfiguration] = useState();
+  const options = [
+    { value: "0.5", label: "30 minutes" },
+    { value: "1", label: "1 hour" },  
+    { value: "2", label: "2 hours" },
+    { value: "3", label: "3 hours" },
+    { value: "4", label: "4 hours" },
+    { value: "5", label: "5 hours" },
+    { value: "6", label: "6 hours" },
+    { value: "12", label: "12 hours" },
+    { value: "24", label: "24 hours" },
+  ]
   useEffect(() => {
     if (user) {
 
@@ -34,7 +46,11 @@ export default function EditProfile() {
       setCity(user.location)
       setMobile(user.mobile)
       setPreview(user.avatar)
-
+      if (user.biddingAcceptingTimeConfiguration) {
+        setBiddingAcceptingTimeConfiguration(
+          (user.biddingAcceptingTimeConfiguration / 60).toString() // convert minutes to hours string
+        );
+      }
     }
   }, [user])
 
@@ -69,7 +85,9 @@ export default function EditProfile() {
       email,
       mobile,
       location: city,
-      avatar: img
+      avatar: img,
+      biddingAcceptingTimeConfiguration: parseFloat(biddingAcceptingTimeConfiguration) * 60
+
 
     }
 
@@ -108,15 +126,18 @@ export default function EditProfile() {
 
 
   return (
-    <motion.div className="editProfile page"
+    <motion.div
+      className="editProfile page"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: .2 }}
+      transition={{ duration: 0.2 }}
     >
       <div className="flex-bet">
         <h2>Edit Profile</h2>
-        <button className="red" onClick={() => logout(dispatch)}>Logout</button>
+        <button className="red" onClick={() => logout(dispatch)}>
+          Logout
+        </button>
       </div>
 
       <div className="form">
@@ -131,7 +152,6 @@ export default function EditProfile() {
 
             <label htmlFor="avatarimg" className="blue">
               <CloudUploadIcon sx={{ fontSize: 30 }} />
-
             </label>
             <input id="avatarimg" type="file" onChange={(e) => handleFile(e)} />
           </div>
@@ -141,40 +161,97 @@ export default function EditProfile() {
           <div className="left">
             <div className="title">
               <p>Name : </p>
-              <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </div>
             <div className="title">
-              <div className="p flex">Email :
+              <div className="p flex">
+                Email :
                 <div className="isVerified " title="Verify your email address">
-                  {
-                    user.emailverified ?
-                      <VerifiedIcon sx={{ fontSize: 20 }} style={{ color: "#05396B" }} />
-                      : <button className={emailSent ? `green notverified` : `yellow notverified`} onClick={verifyEmail}> <VerifiedIcon sx={{ fontSize: 20 }} style={emailSent ? { color: "#53C249" } : { color: "#C28949" }} />{emailSent ? "Verification Email Sent" : "Click to Verify"}</button>}
+                  {user.emailverified ? (
+                    <VerifiedIcon
+                      sx={{ fontSize: 20 }}
+                      style={{ color: "#05396B" }}
+                    />
+                  ) : (
+                    <button
+                      className={
+                        emailSent ? `green notverified` : `yellow notverified`
+                      }
+                      onClick={verifyEmail}
+                    >
+                      {" "}
+                      <VerifiedIcon
+                        sx={{ fontSize: 20 }}
+                        style={
+                          emailSent
+                            ? { color: "#53C249" }
+                            : { color: "#C28949" }
+                        }
+                      />
+                      {emailSent
+                        ? "Verification Email Sent"
+                        : "Click to Verify"}
+                    </button>
+                  )}
                 </div>
-
               </div>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="title">
+              <p>Bidding Accepting Time Configuration : </p>
+              <Select
+                options={options}
+                onChange={(selectedOptions) =>
+                  setBiddingAcceptingTimeConfiguration(selectedOptions.value)
+                }
+                value={
+                  options.find(
+                    (option) =>
+                      option.value === biddingAcceptingTimeConfiguration
+                  ) || null
+                }
+              />
             </div>
           </div>
           <div className="right">
             <div className="title">
               <p>Location (city) : </p>
-              <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
             </div>
             <div className="title">
-              <div className="p flex">Mobile :
-                <div className="isVerified " title="Verify your Mobile number ">
-                </div>
-
+              <div className="p flex">
+                Mobile :
+                <div
+                  className="isVerified "
+                  title="Verify your Mobile number "
+                ></div>
               </div>
-              <input type="number" value={mobile} onChange={(e) => setMobile(e.target.value)} />
+              <input
+                type="number"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+              />
             </div>
           </div>
         </div>
       </div>
 
       <div className="flex">
-        <button className="blue" onClick={handleSubmit} disabled={isLoading}>{isLoading ? "Loading ..." : "Edit Profile"}</button>
+        <button className="blue" onClick={handleSubmit} disabled={isLoading}>
+          {isLoading ? "Loading ..." : "Edit Profile"}
+        </button>
       </div>
     </motion.div>
   );
