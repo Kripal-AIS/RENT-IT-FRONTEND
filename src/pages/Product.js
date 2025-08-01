@@ -23,6 +23,9 @@ export default function Product() {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [address, setAddress] = useState();
+  const [biddingPrice, setBiddingPrice] = useState(0);
+  const fetchProduct = async () => {
+    // try{
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -108,7 +111,8 @@ const fetchProduct = async () => {
         prodImg: product.image,
         ownerId: product.renterid,
         ownerAvatar: product.renter.avatar,
-        ownerName: product.renter.username
+        ownerName: product.renter.username,
+        biddingPrice:biddingPrice ||  product.rent
       }
 
       try {
@@ -166,6 +170,13 @@ const fetchProduct = async () => {
                   <input id="enddate" value={endDate} onChange={(e) => setEndDate(e.target.value)} type="date" name="enddate" />
                 </div>
               </div>
+              <div className="detailBox">
+                <div className="subDetail">
+                  <label htmlFor="biddingPrice">Bidding Price</label>
+                  <input id="biddingPrice" value={biddingPrice} onChange={(e) => setBiddingPrice(e.target.value)} type="input" name="biddingPrice" />
+                </div>
+              </div>
+              
               <div className="detailBox">
                 <textarea name="address" value={address} onChange={(e) => setAddress(e.target.value)} id="address" cols="30" rows="10" placeholder="Enter your Address"></textarea>
               </div>

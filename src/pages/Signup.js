@@ -7,6 +7,7 @@ import { API } from "../API";
 import { motion } from "framer-motion";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
+import Select from "react-select";
 export default function Signup() {
   const [page, setPage] = useState(1);
 
@@ -152,8 +153,12 @@ export default function Signup() {
                 Next <ArrowCircleRightIcon />
               </button>
             </div>
-            <button className="blue" disabled={isError || isLoading} onClick={handleSubmit}>
-              { isLoading ? "Loading ..." : "Signup"}
+            <button
+              className="blue"
+              disabled={isError || isLoading}
+              onClick={handleSubmit}
+            >
+              {isLoading ? "Loading ..." : "Signup"}
             </button>
           </div>
           <Link to="/login">Already have an account</Link>
