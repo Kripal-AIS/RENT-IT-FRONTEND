@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import io from "socket.io-client";
+import socket from "../sockets" // adjust path if needed
 
-const socket = io("http://localhost:5000"); // Create socket once outside component
+
+
 
 function ChatWithOwner() {
   const currentUser = JSON.parse(localStorage.getItem("user"));
+  
   const currentUserId = currentUser?._id;
   const location = useLocation();
   const { ownerId } = location.state || {};
@@ -69,7 +71,7 @@ function ChatWithOwner() {
       message,
     });
 
-  //  setMessages((prev) => [...prev, { fromSelf: true, message }]);
+   //  setMessages((prev) => [...prev, { fromSelf: true, message }]);
     setMessage("");
 
     try {

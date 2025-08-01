@@ -46,6 +46,7 @@ function OwnerInbox() {
       ) : (
         <ul>
           {userList.map((uId, index) => (
+         
             <li key={index} onClick={() => openChat(uId)} style={{ cursor: "pointer" }}>
               Chat with User ID: {uId}
             </li>

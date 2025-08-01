@@ -2,9 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import io from "socket.io-client";
-
-const socket = io("http://localhost:5000");
+import socket from "../sockets"; 
 
 function OwnerChat() {
   const { userId } = useParams(); // the user you're chatting with

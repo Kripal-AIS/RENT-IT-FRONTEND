@@ -83,7 +83,13 @@ export default function Header() {
                   Queries{" "}
                 </Link>
               )}
-
+               {!user?.isAdmin && (
+                <Link to="/owner/inbox">
+                  {" "}
+                  <ForumIcon sx={{ fontSize: 30 }} />
+                  Inbox{" "}
+                </Link>
+              )}
               {!user?.isAdmin && (
                 <Link to="/requests">
                   {" "}
