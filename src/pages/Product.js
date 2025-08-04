@@ -332,3 +332,4 @@ const fetchProduct = async () => {
     );
   }
 }
+}
