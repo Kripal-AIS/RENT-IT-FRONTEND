@@ -24,9 +24,7 @@ export default function Product() {
   const [endDate, setEndDate] = useState();
   const [address, setAddress] = useState();
   const [biddingPrice, setBiddingPrice] = useState(0);
-  const fetchProduct = async () => {
-    // try{
-
+  
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -331,4 +329,4 @@ const fetchProduct = async () => {
       </div>
     );
   }
-}
+  }
