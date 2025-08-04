@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../API";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import ReviewCard from "../components/ReviewCard";
 import Loader from "../components/Loader";
 import { motion } from "framer-motion";
@@ -12,31 +11,43 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 
 
 export default function Product() {
-  let { id } = useParams();
-  const user = useSelector((state) => state.auth);
+  const { id } = useParams();
   const navigate = useNavigate();
 
+  const [user, setUser] = useState(null);
   const [product, setProduct] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const isAssignedToCurrentUser = true;
-
-  const [reqSent,setReqSent] = useState(false)
+  const [reqSent, setReqSent] = useState(false);
   const [modelShow, setModelShow] = useState(false);
   const [chooseDate, setChooseDate] = useState(false);
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [address, setAddress] = useState();
+  const [biddingPrice, setBiddingPrice] = useState(0);
   const fetchProduct = async () => {
     // try{
 
-    const res = await axios.get(API + `/product/${id}`);
-    setProduct(res.data);
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+    fetchProduct();
+  }, []);
+const fetchProduct = async () => {
+  setIsLoading(true);
+  try {
+    const res = await axios.get(API + `/product/${id}`, { withCredentials: true });
+    if (res.status === 200) {
+      setProduct(res.data);
+    }
+  } catch (error) {
+    alert("Failed to fetch product");
+  } finally {
+    setIsLoading(false);
+  }
+};
 
-    // }
-    // catch(e){
-
-    // }
-  };
 
   const retriveProduct = async () => {
     setIsLoading(true);
@@ -100,7 +111,8 @@ export default function Product() {
         prodImg: product.image,
         ownerId: product.renterid,
         ownerAvatar: product.renter.avatar,
-        ownerName: product.renter.username
+        ownerName: product.renter.username,
+        biddingPrice:biddingPrice ||  product.rent
       }
 
       try {
@@ -158,6 +170,13 @@ export default function Product() {
                   <input id="enddate" value={endDate} onChange={(e) => setEndDate(e.target.value)} type="date" name="enddate" />
                 </div>
               </div>
+              <div className="detailBox">
+                <div className="subDetail">
+                  <label htmlFor="biddingPrice">Bidding Price</label>
+                  <input id="biddingPrice" value={biddingPrice} onChange={(e) => setBiddingPrice(e.target.value)} type="input" name="biddingPrice" />
+                </div>
+              </div>
+              
               <div className="detailBox">
                 <textarea name="address" value={address} onChange={(e) => setAddress(e.target.value)} id="address" cols="30" rows="10" placeholder="Enter your Address"></textarea>
               </div>
@@ -285,6 +304,23 @@ export default function Product() {
               )}
             </div>
           </div>
+          <div className="chat-section">
+  
+ <button
+  className="blue"
+  onClick={() =>
+    navigate("/chatwithowner", {
+      state: {
+        
+        ownerId: product.renterid
+      },
+    })
+  }
+>
+  Chat with Owner
+</button>
+</div>
+
         </div>
       </motion.div>
     );
@@ -295,4 +331,5 @@ export default function Product() {
       </div>
     );
   }
+}
 }
