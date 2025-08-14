@@ -207,32 +207,32 @@ export default function MyTools() {
                 No Products
               </div>
             )
-          ) : borrowed.length ? (
+          ) : borrowed?.length ? (
             <>
-              {borrowed.map((prd, index) => (
+              {borrowed?.map((prd, index) => (
                 <>
                   {/* <ProductCard index={index} {...prd} /> */}
                   <div key={index} className="cards ">
                     <div className="product">
                       <img
-                        src={prd.image}
+                        src={prd?.image}
                         alt=""
-                        onClick={() => navigate(`/product/${prd._id}`)}
+                        onClick={() => navigate(`/product/${prd?._id}`)}
                       />
                     </div>
                     <div
                       className="des"
-                      onClick={() => navigate(`/product/${prd._id}`)}
+                      onClick={() => navigate(`/product/${prd?._id}`)}
                     >
-                      <h3>{prd.title}</h3>
+                      <h3>{prd?.title}</h3>
                     </div>
                     <p>
-                      {prd.rent}
-                      {prd.timeperiod}
+                      {prd?.rent}
+                      {prd?.timeperiod}
                     </p>
                     <p>
-                     from : {changeDateFormat( prd.agreement.from)}<br></br>
-                     to : {changeDateFormat( prd.agreement.to)}
+                     from : {changeDateFormat( prd?.agreement.from)}<br></br>
+                     to : {changeDateFormat( prd?.agreement.to)}
                     </p>
 
 
