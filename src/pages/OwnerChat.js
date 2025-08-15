@@ -31,7 +31,7 @@ if (!roomId || roomId.includes("undefined")) {
     // 3. Fetch existing messages
     const fetchMessages = async () => {
       try {
-        const res = await axios.post("http://localhost:5000/api/message/getmsg", {
+        const res = await axios.post(`${API}/api/message/getmsg`, {
           from: user._id,
           to: userId,
         });
@@ -76,7 +76,7 @@ useEffect(() => {
 
     // 2. Save in DB
     try {
-      await axios.post("http://localhost:5000/api/message/addmsg", {
+      await axios.post(`${API}/api/message/addmsg`, {
         from: user._id,
         to: userId,
         message,

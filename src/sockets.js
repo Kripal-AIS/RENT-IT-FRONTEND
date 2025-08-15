@@ -1,7 +1,8 @@
 // socket.js
 import { io } from "socket.io-client";
+import API from "./api"; // Adjust the import path as necessary
 
-const socket = io("http://localhost:5000", {
+const socket = io(API, {
   withCredentials: true,
 });
 

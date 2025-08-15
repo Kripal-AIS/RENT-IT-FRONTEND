@@ -32,7 +32,7 @@ function ChatWithOwner() {
 
     const fetchMessages = async () => {
       try {
-        const res = await axios.post("http://localhost:5000/api/message/getmsg", {
+        const res = await axios.post(`${API}/api/message/getmsg`, {
           from: currentUserId,
           to: ownerId,
         });
@@ -75,7 +75,7 @@ function ChatWithOwner() {
     setMessage("");
 
     try {
-      await axios.post("http://localhost:5000/api/message/addmsg", {
+      await axios.post(`${API}/api/message/addmsg`, {
         from: currentUserId,
         to: ownerId,
         message,

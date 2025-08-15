@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API } from "../api";
 
 function OwnerInbox() {
   const [userList, setUserList] = useState([]);
@@ -13,7 +14,7 @@ function OwnerInbox() {
   useEffect(() => {
     const fetchInboxUsers = async () => {
       try {
-        const res = await axios.post("http://localhost:5000/api/message/inbox-users", {
+        const res = await axios.post(`${API}/api/message/inbox-users`, {
           ownerId: user._id,
         });
         console.log(res, "Inbox users fetched successfully");
